@@ -44,7 +44,6 @@ export function DeviceSelector({
     <div className="w-full max-w-sm space-y-2">
       {/* デバイス選択用ラベルとセレクトボックス */}
       <div className="space-y-1">
-        <Label htmlFor="microphone-select">Microphone</Label>
         <Select
           value={currentDevice}
           onValueChange={onDeviceChange}

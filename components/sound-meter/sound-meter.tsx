@@ -189,19 +189,6 @@ export function SoundMeter() {
             />
           )}
 
-          {/* dB値表示 */}
-          <div className="text-center">
-            <div className={cn(
-              'text-6xl font-bold transition-colors',
-              isAboveThreshold ? 'text-destructive' : 'text-primary'
-            )}>
-              {decibels.toFixed(1)} dB
-            </div>
-            <p className="text-sm text-muted-foreground mt-2">
-              Sound Level
-            </p>
-          </div>
-
           {/* 波形ビジュアライザー */}
           <WaveformVisualizer
             analyser={analyserRef.current}

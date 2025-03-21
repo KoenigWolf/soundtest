@@ -16,13 +16,13 @@ export const PageContainer = ({
   return (
     <div
       className={cn(
-        "container mx-auto px-4 py-8 min-h-screen flex flex-col items-center justify-center",
+        "container mx-auto py-3 min-h-screen flex flex-col items-center",
         className
       )}
     >
       {/* タイトルが提供されている場合、見出しとして表示 */}
       {title && (
-        <h1 className="text-4xl font-bold mb-8 text-center">{title}</h1>
+        <h1 className="text-4xl font-bold mb-3 text-center">{title}</h1>
       )}
       {/* 子要素をレンダリング */}
       {children}
