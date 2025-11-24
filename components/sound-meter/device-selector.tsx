@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Mic } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { formatDeviceName } from '@/lib/audio-utils';
 
 // Props 定義：デバイスリスト、選択中のデバイス、変更ハンドラ、無効状態
 interface DeviceSelectorProps {
@@ -27,30 +28,21 @@ export function DeviceSelector({
   // 選択されたデバイスがない場合は、最初のデバイスを使用
   const currentDevice = selectedDevice || (devices.length > 0 ? devices[0].deviceId : '');
 
-  // デバイス名のフォーマット関数
-  const formatDeviceName = (device: MediaDeviceInfo) => {
-    if (device.label) {
-      // MacBook の内蔵マイクの場合、シンプルな名称にする
-      if (device.label.includes('Built-in') || device.label.includes('MacBook')) {
-        return 'Built-in Microphone';
-      }
-      return device.label;
-    }
-    // ラベルがない場合、デバイスIDの一部を表示
-    return `Microphone ${device.deviceId.slice(0, 8)}`;
-  };
-
   return (
-    <div className="w-full max-w-sm space-y-2">
+    <div className="w-full max-w-sm mx-auto space-y-3">
       {/* デバイス選択用ラベルとセレクトボックス */}
-      <div className="space-y-1">
+      <div className="space-y-2.5">
+        <Label htmlFor="microphone-select" className="text-sm sm:text-base font-medium flex items-center gap-2 text-foreground">
+          <Mic className="h-4 w-4 sm:h-5 sm:w-5" />
+          Microphone Device
+        </Label>
         <Select
           value={currentDevice}
           onValueChange={onDeviceChange}
           disabled={disabled}
           name="microphone-select"
         >
-          <SelectTrigger id="microphone-select" className="w-full">
+          <SelectTrigger id="microphone-select" className="w-full h-11 sm:h-12 border-2 rounded-lg shadow-sm">
             <SelectValue placeholder="Select a microphone" />
           </SelectTrigger>
           <SelectContent>
@@ -66,7 +58,7 @@ export function DeviceSelector({
         </Select>
       </div>
       {/* 利用可能なマイクの数を表示 */}
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs sm:text-sm text-muted-foreground text-center">
         {devices.length === 1 ? '1 microphone available' : `${devices.length} microphones available`}
       </p>
     </div>
